@@ -1,4 +1,4 @@
-/* --- 見出し（h2および.headingクラス）のスタイル --- */
+/* --- 見出し --- */
 h2, .heading {
   display: block;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
@@ -11,31 +11,12 @@ h2, .heading {
   border-bottom: 1px solid #cccccc; /* プレーンな下線のみ */
 }
 
-/* リンク付き見出しのホバー表示 */
 a.heading:hover {
   color: #0056b3;
   text-decoration: none;
 }
 
-/* --- フッター（footer）のスタイル --- */
-footer {
-  margin-top: 24px;
-  padding-top: 12px;
-  border-top: 1px solid #e0e0e0;
-  font-size: 12px;
-  color: #666666;
-}
-
-footer a {
-  color: #0056b3;
-  text-decoration: none;
-}
-
-footer a:hover {
-  text-decoration: underline;
-}
-
-/* --- テーブル（table）全体のスタイル --- */
+/* --- テーブル全体のスタイル --- */
 table {
   width: 100%;
   max-width: 600px;
@@ -83,4 +64,22 @@ table td:nth-child(3) {
 /* 行のホバー強調 */
 table tbody tr:hover {
   background-color: #f9f9f9;
+}
+
+/* --- フッター --- */
+footer {
+  margin-top: 24px;
+  padding-top: 12px;
+  border-top: 1px solid #e0e0e0;
+  font-size: 12px;
+  color: #666666;
+}
+
+footer a {
+  color: #0056b3;
+  text-decoration: none;
+}
+
+footer a:hover {
+  text-decoration: underline;
 }
