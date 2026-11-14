@@ -10,70 +10,6 @@
   <button onclick="runSearch(false)" style="padding: 4px 8px; font-size: 14px;">次へ</button>
   <button onclick="runSearch(true)" style="padding: 4px 8px; font-size: 14px;">前へ</button>
 </div>
-
-<script>
-function runSearch(backwards) {
-  const query = document.getElementById('search-input').value;
-  if (!query) return;
-
-  // window.find(aString, aCaseSensitive, aBackwards, aWrapAround, aWholeWord, aSearchInFrames, aShowDialog)
-  // ブラウザ標準の検索機能を実行します
-  const found = window.find(query, false, backwards, true, false, false, false);
-  
-  if (!found) {
-    alert('見つかりませんでした');
-  }
-}
-
-// Enterキーで「次へ」、Shift+Enterで「前へ」検索
-document.getElementById('search-input').addEventListener('keydown', function(e) {
-  if (e.key === 'Enter') {
-    e.preventDefault();
-    runSearch(e.shiftKey);
-  }
-  function sortTable(colIndex) {
-  const table = document.querySelector('table');
-  const tbody = table.querySelector('tbody');
-  const rows = Array.from(tbody.querySelectorAll('tr'));
-  
-  // 現在の並び順（昇順/降順）を切り替え
-  const sortKey = 'sort-dir-' + colIndex;
-  const currentDir = table.getAttribute(sortKey) === 'asc' ? 'desc' : 'asc';
-  table.setAttribute(sortKey, currentDir);
-
-  rows.sort((rowA, rowB) => {
-    const cellA = rowA.querySelectorAll('td')[colIndex].textContent.trim();
-    const cellB = rowB.querySelectorAll('td')[colIndex].textContent.trim();
-
-    // 「246474人」や「1位」から数値部分（マイナス符号や小数含む）だけを抽出する関数
-    const parseNum = (str) => {
-      const cleaned = str.replace(/[^\d\-.]/g, '');
-      return parseFloat(cleaned) || 0;
-    };
-
-    const valA = parseNum(cellA);
-    const valB = parseNum(cellB);
-
-    if (valA < valB) return currentDir === 'asc' ? -1 : 1;
-    if (valA > valB) return currentDir === 'asc' ? 1 : -1;
-    return 0;
-  });
-
-  // 並び替えた行をDOMに再配置
-  rows.forEach(row => tbody.appendChild(row));
-}
-
-// ページ読み込み完了時に右3列のthにクリックイベントを付与
-document.addEventListener('DOMContentLoaded', () => {
-  const ths = document.querySelectorAll('table th');
-  // インデックス 1 (訪問者数), 2 (順位), 3 (順位変動) を対象にする
-  for (let i = 1; i < ths.length; i++) {
-    ths[i].addEventListener('click', () => sortTable(i));
-    ths[i].title = 'クリックして並べ替え';
-  }
-});
-});
-</script>
 <h2>2026年11月12日時点の訪問者数データ</h2>
 <a href="/ekimemo-data/visitorlank/index.html">>>戻る</a>
 <table>
@@ -9455,5 +9391,68 @@ document.addEventListener('DOMContentLoaded', () => {
 <tr><td><a href="https://ekimemo.com/database/station/9267/activity">薩摩求名駅</a></td><td>6950人</td><td>9372位</td><td>-1</td></tr>
 </tbody>
 </table>
+<script>
+function runSearch(backwards) {
+  const query = document.getElementById('search-input').value;
+  if (!query) return;
+
+  // window.find(aString, aCaseSensitive, aBackwards, aWrapAround, aWholeWord, aSearchInFrames, aShowDialog)
+  // ブラウザ標準の検索機能を実行します
+  const found = window.find(query, false, backwards, true, false, false, false);
+  
+  if (!found) {
+    alert('見つかりませんでした');
+  }
+}
+
+// Enterキーで「次へ」、Shift+Enterで「前へ」検索
+document.getElementById('search-input').addEventListener('keydown', function(e) {
+  if (e.key === 'Enter') {
+    e.preventDefault();
+    runSearch(e.shiftKey);
+  }
+  function sortTable(colIndex) {
+  const table = document.querySelector('table');
+  const tbody = table.querySelector('tbody');
+  const rows = Array.from(tbody.querySelectorAll('tr'));
+  
+  // 現在の並び順（昇順/降順）を切り替え
+  const sortKey = 'sort-dir-' + colIndex;
+  const currentDir = table.getAttribute(sortKey) === 'asc' ? 'desc' : 'asc';
+  table.setAttribute(sortKey, currentDir);
+
+  rows.sort((rowA, rowB) => {
+    const cellA = rowA.querySelectorAll('td')[colIndex].textContent.trim();
+    const cellB = rowB.querySelectorAll('td')[colIndex].textContent.trim();
+
+    // 「246474人」や「1位」から数値部分（マイナス符号や小数含む）だけを抽出する関数
+    const parseNum = (str) => {
+      const cleaned = str.replace(/[^\d\-.]/g, '');
+      return parseFloat(cleaned) || 0;
+    };
+
+    const valA = parseNum(cellA);
+    const valB = parseNum(cellB);
+
+    if (valA < valB) return currentDir === 'asc' ? -1 : 1;
+    if (valA > valB) return currentDir === 'asc' ? 1 : -1;
+    return 0;
+  });
+
+  // 並び替えた行をDOMに再配置
+  rows.forEach(row => tbody.appendChild(row));
+}
+
+// ページ読み込み完了時に右3列のthにクリックイベントを付与
+document.addEventListener('DOMContentLoaded', () => {
+  const ths = document.querySelectorAll('table th');
+  // インデックス 1 (訪問者数), 2 (順位), 3 (順位変動) を対象にする
+  for (let i = 1; i < ths.length; i++) {
+    ths[i].addEventListener('click', () => sortTable(i));
+    ths[i].title = 'クリックして並べ替え';
+  }
+});
+});
+</script>
   </body>
 </html>
