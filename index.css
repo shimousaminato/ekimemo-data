@@ -46,7 +46,7 @@ a:hover {
 /* --- テーブル --- */
 table {
   width: 100%;
-  max-width: 600px;
+  max-width: 80%;
   border-collapse: collapse;
   font-size: 14px;
   color: #333333;
